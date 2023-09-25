@@ -8,6 +8,6 @@ import axios from 'axios';
 //chave Api:6095861d55786f2fd544aef5d27ffb3e
 
 const api = axios.create({
-    baseURL:'https://api.themoviedb.org/3/'
+ baseURL: 'https://api.themoviedb.org/3/'
 })
 export default api;

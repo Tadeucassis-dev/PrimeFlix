@@ -1,49 +1,49 @@
 
-import {useEffect, useState}from 'react';
+import { useEffect, useState } from 'react';
 import './favoritos.css'
 import { Link } from 'react-router-dom'
 
-function Favoritos(){
-    const[filmes, setFilmes]=useState([])
+function Favoritos() {
+ const [filmes, setFilmes] = useState([])
 
-    useEffect(()=>{
+ useEffect(() => {
 
-        const minhaLista= localStorage.getItem("@primeflix");
-        setFilmes(JSON.parse(minhaLista) || [])
+  const minhaLista = localStorage.getItem("@primeflix");
+  setFilmes(JSON.parse(minhaLista) || [])
 
-    },[])
+ }, [])
 
-    function excluirFilme(id){
-        let filtroFilmes = filmes.filter((item)=>{
-            return(item.id !== id)
-        })
-        setFilmes(filtroFilmes);
-        localStorage.setItem ("@primeflix", JSON.stringify(filtroFilmes))
-        alert("FILME EXCLUIDO COM SUCESSO!!!")
-    }
+ function excluirFilme(id) {
+  let filtroFilmes = filmes.filter((item) => {
+   return (item.id !== id)
+  })
+  setFilmes(filtroFilmes);
+  localStorage.setItem("@primeflix", JSON.stringify(filtroFilmes))
+  alert("FILME EXCLUIDO COM SUCESSO!!!")
+ }
 
-    return(
-        <div className='meus-filmes'>
-            <h1>Meus Filmes</h1>
+ return (
+  <div className='meus-filmes'>
+   <h1>Meus Filmes</h1>
 
-            {filmes.length === 0 && <span>Você não possui nemnhum filme cadastrado :( </span>}
+   {filmes.length === 0 && <span>Você não possui nemnhum filme cadastrado :( </span>}
 
-            <ul>
-                {filmes.map((item)=>{
-                    return(
-                        <li key={item.id}>
-                        <span>{item.title}</span>
+   <ul>
+    {filmes.map((item) => {
+     return (
+      <li key={item.id}>
+       <span>{item.title}</span>
 
-                        <div>
-                            <Link to={`/filme/${item.id}`}>Ver detalhes</Link>
-                            <button onClick={()=>excluirFilme(item.id)}>Excluir</button>
-                        </div>
-                        </li>
-                    )
+       <div>
+        <Link to={`/filme/${item.id}`}>Ver detalhes</Link>
+        <button onClick={() => excluirFilme(item.id)}>Excluir</button>
+       </div>
+      </li>
+     )
 
-                })}
-            </ul>
-        </div>
-    )
+    })}
+   </ul>
+  </div>
+ )
 }
 export default Favoritos;
